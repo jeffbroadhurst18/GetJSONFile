@@ -1,0 +1,8 @@
+c:\users\jeff\documents\visual studio 2015\Projects\GetJSON\GetJSON\bin\Debug\GetJSON.exe.config
+c:\users\jeff\documents\visual studio 2015\Projects\GetJSON\GetJSON\bin\Debug\GetJSON.exe
+c:\users\jeff\documents\visual studio 2015\Projects\GetJSON\GetJSON\bin\Debug\GetJSON.pdb
+c:\users\jeff\documents\visual studio 2015\Projects\GetJSON\GetJSON\bin\Debug\Newtonsoft.Json.dll
+c:\users\jeff\documents\visual studio 2015\Projects\GetJSON\GetJSON\bin\Debug\Newtonsoft.Json.xml
+c:\users\jeff\documents\visual studio 2015\Projects\GetJSON\GetJSON\obj\Debug\GetJSON.csprojResolveAssemblyReference.cache
+c:\users\jeff\documents\visual studio 2015\Projects\GetJSON\GetJSON\obj\Debug\GetJSON.exe
+c:\users\jeff\documents\visual studio 2015\Projects\GetJSON\GetJSON\obj\Debug\GetJSON.pdb
