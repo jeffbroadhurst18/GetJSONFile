@@ -16,7 +16,8 @@ namespace GetJSON
         static void Main(string[] args)
         {
             var url = "http://www.footballwebpages.co.uk/league.json?comp=5";
-            ProcessLeague(url, "league");
+            SaveDataToFile(url, "league");
+            GetNLMatches();
             ProcessMatches(94);
             ProcessMatches(118);
             ProcessMatches(187);
@@ -43,6 +44,17 @@ namespace GetJSON
             ProcessMatches(114);
         }
 
+        private static void GetNLMatches()
+        {
+            string url = string.Format("http://www.footballwebpages.co.uk/matches.json?comp=5");
+            var data = _download_jsonobject<Rootobject2>(url);
+            foreach (var m in data.matchesCompetition.match)
+            {
+                var urlMatch = string.Format("http://www.footballwebpages.co.uk/match.json?match={0}", m.id);
+                SaveDataToFile(urlMatch, string.Format("match-{0}", m.id));
+            }
+        }
+
         private static string _download_serialized_json_data<T>(string url) where T : new()
         {
             using (var w = new WebClient())
@@ -60,7 +72,23 @@ namespace GetJSON
             }
         }
 
-        private static void ProcessLeague(string url, string filename)
+        private static T _download_jsonobject<T>(string url) where T : new()
+        {
+            using (var w = new WebClient())
+            {
+                var json_data = string.Empty;
+                // attempt to download JSON data as a string
+                try
+                {
+                    json_data = w.DownloadString(url);
+                }
+                catch (Exception) { }
+                // if string with JSON data is not empty, deserialize it to class and return its instance 
+                return !string.IsNullOrEmpty(json_data) ? JsonConvert.DeserializeObject<T>(json_data) : new T();
+            }
+        }
+
+        private static void SaveDataToFile(string url, string filename)
         {
             var data = _download_serialized_json_data<Rootobject>(url);
             var fileToWrite = string.Format("{0}{1}.json", folder,filename);
