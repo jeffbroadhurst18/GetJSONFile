@@ -100,7 +100,8 @@ namespace GetJSON
 
         private static void ProcessMatches(int team)
         {
-            var url = string.Format("http://www.footballwebpages.co.uk/matches.json?team={0}", team);
+            var month = DateTime.Now.Month.ToString();
+            var url = string.Format("http://www.footballwebpages.co.uk/matches.json?team={0}&month={1}", team,month);
             var data = _download_serialized_json_data<Rootobject>(url);
             var filename = string.Format("matches-{0}.json", team);
             var fileToWrite = string.Format("{0}{1}", folder, filename);
