@@ -16,8 +16,8 @@ namespace GetJSON
         static void Main(string[] args)
         {
             var url = "http://www.footballwebpages.co.uk/league.json?comp=5";
-            SaveDataToFile(url, "league");
-            GetNLMatches();
+            SaveData(url, "league");
+        //    GetNLMatches();
             ProcessMatches(94);
             ProcessMatches(118);
             ProcessMatches(187);
@@ -46,12 +46,13 @@ namespace GetJSON
 
         private static void GetNLMatches()
         {
-            string url = string.Format("http://www.footballwebpages.co.uk/matches.json?comp=5");
+            var month = DateTime.Now.Month.ToString();
+            string url = string.Format("http://www.footballwebpages.co.uk/matches.json?comp=5&month={0}",month);
             var data = _download_jsonobject<Rootobject2>(url);
             foreach (var m in data.matchesCompetition.match)
             {
                 var urlMatch = string.Format("http://www.footballwebpages.co.uk/match.json?match={0}", m.id);
-                SaveDataToFile(urlMatch, string.Format("match-{0}", m.id));
+                SaveData(urlMatch, string.Format("match-{0}", m.id));
             }
         }
 
@@ -88,7 +89,7 @@ namespace GetJSON
             }
         }
 
-        private static void SaveDataToFile(string url, string filename)
+        private static void SaveData(string url, string filename)
         {
             var data = _download_serialized_json_data<Rootobject>(url);
             var fileToWrite = string.Format("{0}{1}.json", folder,filename);
